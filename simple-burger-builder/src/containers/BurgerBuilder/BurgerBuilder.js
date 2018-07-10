@@ -90,33 +90,19 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        // alert('You continue')
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Scot',
-                address: {
-                    street: 'test',
-                    zip: '12345',
-                    country: "USA"
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
-        }
-
-        axios
-            .post('/orders.json', order)
-            .then(reponse => {
-                console.log(reponse)
-                this.setState({loading: false, purchasing: false});
-            })
-            .catch(error => {
-                console.error(error.message);
-                this.setState({loading: false, purchasing: false});
-            });
+        // alert('You continue') this.setState({loading: true}) const order = {
+        // ingredients: this.state.ingredients,     price: this.state.totalPrice,
+        // customer: {         name: 'Scot',         address: {             street:
+        // 'test',             zip: '12345',             country: "USA"         },
+        //   email: 'test@test.com'     },     deliveryMethod: 'fastest' } axios
+        // .post('/orders.json', order)     .then(reponse => {
+        // console.log(reponse)         this.setState({loading: false, purchasing:
+        // false});     })     .catch(error => {         console.error(error.message);
+        //       this.setState({loading: false, purchasing: false});     });
+        this
+            .props
+            .history
+            .push('/checkout');
     }
 
     render() {
@@ -128,8 +114,9 @@ class BurgerBuilder extends Component {
         }
         let orderSummary = null;
 
-
-        let burger = this.state.error ? <p>Ingredients Can't be loaded!</p> : <Spinner/>
+        let burger = this.state.error
+            ? <p>Ingredients Can't be loaded!</p>
+            : <Spinner/>
 
         if (this.state.ingredients) {
             burger = (
