@@ -13,7 +13,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: "Your Name"
                 },
-                value: 'Scot'
+                value: null
             },
             street: {
                 elementType: 'input',
@@ -21,7 +21,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: "Your Street"
                 },
-                value: 'Scot'
+                value: null
             },
             zip: {
                 elementType: 'input',
@@ -29,7 +29,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: "Your Zipcode"
                 },
-                value: 'Scot'
+                value: null
             },
             country: {
                 elementType: 'input',
@@ -37,7 +37,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: "Your Country"
                 },
-                value: 'Scot'
+                value: null
             },
             email: {
                 elementType: 'input',
@@ -45,7 +45,7 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: "Your Email"
                 },
-                value: 'Scot'
+                value: null
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -54,15 +54,14 @@ class ContactData extends Component {
                         {
                             value: 'fastest',
                             displayValue: 'Fastest'
-                        },
-                        {
+                        }, {
                             value: 'cheapest',
                             displayValue: 'Cheapest'
                         }
                     ]
                 },
                 value: 'Scot'
-            },
+            }
         },
         loading: false
     }
@@ -101,12 +100,20 @@ class ContactData extends Component {
     }
 
     render() {
+        const formElements = [];
+        for (let key in this.state.orderForm) {
+            formElements.push({id: key, config: this.state.orderForm[key]})
+        }
 
         let form = (
             <form action="">
-                <Input elementType="..." elementConfig="..." value="..."/>
-                <Input inputtype='input' type="text" name="email" placeholder="Your email"/>
-                <Input inputtype='input' type="text" name="street" placeholder="Your street"/>
+                {formElements.map(formElement => {
+                    return (<Input
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}/>);
+                })}
                 <Input
                     inputtype='input'
                     type="text"
