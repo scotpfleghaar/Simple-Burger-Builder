@@ -66,24 +66,18 @@ class ContactData extends Component {
         loading: false
     }
 
-
-
     orderHandler = (event) => {
         event.preventDefault();
         this.setState({loading: true})
+        const formData = {}
+        for(let formElement in this.state.orderForm){
+            formData[formElement] = this.state.orderForm[formElement].value
+        }
+
         const order = {
             ingredients: this.props.ingredients,
             price: this.state.price,
-            customer: {
-                name: 'Scot',
-                address: {
-                    street: 'test',
-                    zip: '12345',
-                    country: "USA"
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
+            orderData: formData
         }
         axios
             .post('/orders.json', order)
@@ -124,7 +118,7 @@ class ContactData extends Component {
         }
 
         let form = (
-            <form action="">
+            <form onSubmit={this.orderHandler}>
                 {formElements.map(formElement => {
                     return (<Input
                         key={formElement.id}
@@ -138,7 +132,7 @@ class ContactData extends Component {
                     type="text"
                     name="postalcode"
                     placeholder="Your Postal Code"/>
-                <Button clicked={this.orderHandler} buttonType="Success">ORDER</Button>
+                <Button buttonType="Success">ORDER</Button>
             </form>
         );
         if (this.state.loading) {
