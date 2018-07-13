@@ -22,5 +22,5 @@
 }
 .InputElement:focus {
     outline: none;
-    background-color: #999;
+    background-color: #fcfcfc;
 }
