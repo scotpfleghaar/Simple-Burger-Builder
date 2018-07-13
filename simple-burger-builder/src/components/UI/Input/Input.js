@@ -4,7 +4,7 @@ const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement]
 
-    if(props.invalid && props.shouldValidate){
+    if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid)
     }
 
@@ -35,7 +35,7 @@ const input = (props) => {
             );
             break;
         default:
-            inputElement = "Error: Please define input type element"
+            inputElement = "Error: Please define input type element: " + props.elementType
     }
     return (
         <div className={classes.Input}>
