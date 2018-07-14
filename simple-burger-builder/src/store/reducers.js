@@ -6,7 +6,7 @@ const intitialState = {
 };
 
 const reducer = (state = intitialState, actions) => {
-
+    
 }
 
 export default reducer;
