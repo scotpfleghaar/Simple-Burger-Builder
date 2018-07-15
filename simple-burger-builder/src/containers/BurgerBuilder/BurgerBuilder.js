@@ -32,9 +32,7 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
-        // axios     .get('https://burgerapp-6122a.firebaseio.com/ingredients.json')
-        // .then(response => {         this.setState({ingredients: response.data}) })
-        // .catch(error => {         this.setState({error: true})     })
+       this.props.onInitIngredients();
     }
 
     // addIngredientHandler = (type) => {
@@ -110,8 +108,8 @@ class BurgerBuilder extends Component {
             disableInfo[key] = disableInfo[key] <= 0;
         }
         let orderSummary = null;
-
-        let burger = this.state.error
+        console.log("HERE!", this.props.error);
+        let burger = this.props.error
             ? <p>Ingredients Can't be loaded!</p>
             : <Spinner/>
 
@@ -151,14 +149,16 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        error: state.error
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdded: (ingredientName) => dispatch(actionTypes.addIngredient(ingredientName)),
-        onIngredientRemoved: (ingredientName) => dispatch(actionTypes.removeIngredient(ingredientName))
+        onIngredientRemoved: (ingredientName) => dispatch(actionTypes.removeIngredient(ingredientName)),
+        onInitIngredients: () => dispatch(actionTypes.initIngredients())
     }
 }
 
