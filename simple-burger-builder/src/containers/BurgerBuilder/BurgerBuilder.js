@@ -15,8 +15,8 @@ class BurgerBuilder extends Component {
     // constructor(props){     super(props)     this.state = {     } }
     state = {
         purchasing: false,
-        loading: false,
-        error: false
+        // loading: false,
+        // error: false
     }
     updatePurchaseState(ingredients) {
         const sum = Object
@@ -134,9 +134,9 @@ class BurgerBuilder extends Component {
                 purchaseCancelled={this.purchaseCancelHandler}
                 ingredients={this.props.ings}/>
         }
-        if (this.state.loading) {
-            orderSummary = <Spinner/>;
-        }
+        // if (this.state.loading) {
+        //     orderSummary = <Spinner/>;
+        // }
 
         return (
             <Aux>
